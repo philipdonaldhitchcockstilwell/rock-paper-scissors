@@ -32,6 +32,7 @@
 #buttonsContainer {
     display: none;
     height: 60px;
+    margin-bottom: 30px;    
 }
 
 .buttons {
@@ -61,4 +62,5 @@
 .scoreDisplay {
     display: flex;
     font-size: 20px;
+    margin: 0px;
 }

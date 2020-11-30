@@ -6,7 +6,7 @@ let playerWins = 0;
 let computerWins = 0;
 let roundNumber = 1;
 
-/* HTML elements for score display */
+/* Declaring HTML elements for score display */
 const scoreElements = document.getElementById('scoreElements');
 let playerScoreDisplay = document.createElement('p');
 playerScoreDisplay.classList.add('scoreDisplay');
@@ -14,49 +14,53 @@ let computerScoreDisplay =  document.createElement('p');
 computerScoreDisplay.classList.add('scoreDisplay');
 let roundNumberDisplay = document.createElement('p');
 roundNumberDisplay.classList.add('scoreDisplay');
+let extraRoundInfo = document.createElement('p');
+extraRoundInfo.classList.add('scoreDisplay');
 
-/* Detecting "Play Game" button-press */
+/* Event listener to detect "Play Game" button press */
 document.getElementById("play-game").addEventListener('click', function() {
     playButtonPressed();
     createInfoPanel();
 });
 
-/* When play button is pressed, we will hide the play button and show the game button container */
+/* Hides the play button and shows the "rock, paper scissors" buttons */
 function playButtonPressed() {
     document.getElementById("play-game").style.display = "none";
     document.getElementById("buttonsContainer").style.display = "flex";
 }
-/* Creates info panel. This should be triggered when play button is pressed. */
+/* Generates info panel. This should be triggered when play button is pressed */
 function createInfoPanel() {
     scoreElements.appendChild(playerScoreDisplay);
     scoreElements.appendChild(computerScoreDisplay);
     scoreElements.appendChild(roundNumberDisplay);
+    scoreElements.createElement(extraRoundInfo); // TODO: Give extra round info its own div. Other elements need to stay in place.
     playerScoreDisplay.textContent = 'Player Wins: ' + playerWins;
-    computerScoreDisplay.textContent = 'Computer Wins ' + computerWins;
+    computerScoreDisplay.textContent = 'Computer Wins: ' + computerWins;
+    roundNumberDisplay.textContent = "Round " + roundNumber;
+    extraRoundInfo.textContent = 'Test';
 }
 
-/* Listening for player to click button */
-document.getElementById("rock").addEventListener('click', function() {
-    playerSelection = choose(rock);
+/* Event Listeners for player input. Player input triggers computer choice and round W/L check */
+document.getElementById('rock').addEventListener('click', function() {
+    playerSelection = 'rock';
     computerSelection = computerPlay();
     playRound(playerSelection, computerSelection);
 });
-document.getElementById("paper").onclick = choose("paper");
-document.getElementById("scissors").onclick = choose("scissors");
+document.getElementById('paper').addEventListener('click', function() {
+    playerSelection = 'paper';
+    computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+});
+document.getElementById('scissors').addEventListener('click', function() {
+    playerSelection = 'scissors';
+    computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+});
 
-/* Function to assign the player choice according to which button is pressed. */
-function choose(choice) {
-    playerSelection = choice;
-}
-
-function roundPlay(playerSelection, computerSelection) {
-
-}
-
+/* Generates random integer for use inside computerPlay function */
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
-
 /* This function should return "rock", "paper", or "scissors" */
 function computerPlay() {
 
@@ -80,44 +84,63 @@ function computerPlay() {
             return choiceStr;
     }      
 }
-/* This function plays the round */
-function playRound(playerSelection) {
+/* Compares player value to computer value and adds scores and round numbers */
+function playRound(playerSelection, computerSelection) {
     
-    /* Draw Condition */
-    if (playerSelection.toLowerCase() === computerSelection) {
-        console.log("Draw.");
+    if (roundNumber <= 4){
+        /* Draw Condition */
+        if (playerSelection === computerSelection) {
+            extraRoundInfo.textContent = playerSelection + " vs " + computerSelection + ". Draw.";
 
-    /* Rock conditions for player (W/L) */
-    } else if (playerSelection.toLowerCase() === "rock") {
-        if (computerSelection === "paper") {
-            console.log("Computer wins.");
-            computerWins++;
-            roundNumber++;
-        } else if (computerSelection === "scissors") {
-            console.log("You won the round.");
-            playerWins++;
-            roundNumber++;
-        } 
-    /* Paper conditions for player (W/L) */          
-    } else if (playerSelection.toLowerCase() === "paper") {
-        } else if (computerSelection === "rock") {
-            console.log("You won the round.");
-            playerWins++;
-            roundNumber++;
-        } else if (computerSelection === "scissors") {
-            console.log("Computer wins.");
-            computerWins++;
-            roundNumber++;
-    /* Scissors conditions for player (W/L) */
-    } else if (playerSelection.toLowerCase() === "scissors") {
-        if (computerSelection === "paper") {
-            console.log("You won the round.");
-            playerWins++;
-            roundNumber++;
-        } else if (computerSelection === "rock") {
-            console.log("Computer wins.");
-            computerWins++;
-            roundNumber++;
+        /* Rock conditions for player (W/L) */
+        } else if (playerSelection === "rock") {
+            if (computerSelection === "paper") {
+                extraRoundInfo.textContent = playerSelection + " vs " + computerSelection + ". " + computerSelection + " beats " + playerSelection + ". Computer wins.";
+                computerWins++;
+                roundNumber++;
+                roundNumberDisplay.textContent = "Round " + roundNumber;
+                computerScoreDisplay.textContent = 'Computer Wins: ' + computerWins;
+            } else if (computerSelection === "scissors") {
+                extraRoundInfo.textContent = playerSelection + " vs " + computerSelection + ". " + playerSelection + " beats " + computerSelection + ". You win.";
+                playerWins++;
+                roundNumber++;
+                roundNumberDisplay.textContent = "Round " + roundNumber;
+                playerScoreDisplay.textContent = 'Player Wins: ' + playerWins;
+            } 
+        /* Paper conditions for player (W/L) */          
+        } else if (playerSelection === "paper") {
+            if (computerSelection === "rock") {
+                extraRoundInfo.textContent = playerSelection + " vs " + computerSelection + ". " + playerSelection + " beats " + computerSelection + ". You win.";
+                playerWins++;
+                roundNumber++;
+                roundNumberDisplay.textContent = "Round " + roundNumber;
+                playerScoreDisplay.textContent = 'Player Wins: ' + playerWins;
+            } else if (computerSelection === "scissors") {
+                console.log("Computer wins.");
+                extraRoundInfo.textContent = playerSelection + " vs " + computerSelection + ". " + computerSelection + " beats " + playerSelection + ". Computer wins.";
+                computerWins++;
+                roundNumber++;
+                roundNumberDisplay.textContent = "Round " + roundNumber;
+                computerScoreDisplay.textContent = 'Computer Wins: ' + computerWins;
+            }
+        /* Scissors conditions for player (W/L) */
+        } else if (playerSelection === "scissors") {
+            if (computerSelection === "paper") {
+                extraRoundInfo.textContent = playerSelection + " vs " + computerSelection + ". " + playerSelection + " beats " + computerSelection + ". You win.";
+                playerWins++;
+                roundNumber++;
+                roundNumberDisplay.textContent = "Round " + roundNumber;
+                playerScoreDisplay.textContent = 'Player Wins: ' + playerWins;
+            } else if (computerSelection === "rock") {
+                extraRoundInfo.textContent = playerSelection + " vs " + computerSelection + ". " + computerSelection + " beats " + playerSelection + ". Computer wins.";
+                computerWins++;
+                roundNumber++;
+                roundNumberDisplay.textContent = "Round " + roundNumber;
+                computerScoreDisplay.textContent = 'Computer Wins: ' + computerWins;
+            }
         }
     }
 }
+
+// TODO: Add functionality for when 5 rounds are played. Screen should display winner.
+// TODO: Add button to start new game. New game should reset all values.
