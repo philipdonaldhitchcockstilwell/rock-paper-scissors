@@ -33,7 +33,7 @@ function createInfoPanel() {
     scoreElements.appendChild(playerScoreDisplay);
     scoreElements.appendChild(computerScoreDisplay);
     scoreElements.appendChild(roundNumberDisplay);
-    scoreElements.createElement(extraRoundInfo); // TODO: Give extra round info its own div. Other elements need to stay in place.
+    scoreElements.appendChild(extraRoundInfo); /* TODO: Give extra round info its own div. Other elements need to stay in place. */
     playerScoreDisplay.textContent = 'Player Wins: ' + playerWins;
     computerScoreDisplay.textContent = 'Computer Wins: ' + computerWins;
     roundNumberDisplay.textContent = "Round " + roundNumber;
@@ -142,5 +142,5 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// TODO: Add functionality for when 5 rounds are played. Screen should display winner.
-// TODO: Add button to start new game. New game should reset all values.
+/* TODO: Add functionality for when 5 rounds are played. Screen should display winner. */
+/* TODO: Add button to start new game. New game should reset all values. */
