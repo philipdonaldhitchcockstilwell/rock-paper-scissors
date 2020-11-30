@@ -1,0 +1,64 @@
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: rgb(0, 0, 0);
+}
+
+#body {
+    font-family: 'Texturina', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vw;
+}
+
+#play-game {
+    display: flex;
+    border: none;
+    background: none;
+    font-family: 'Texturina', serif;
+    font-size: 30px;
+    transition: 0.2s;
+    height: 60px;
+}
+
+#play-game:hover {
+    background-color: yellow;
+}
+
+#buttonsContainer {
+    display: none;
+    height: 60px;
+}
+
+.buttons {
+    width: 100px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 4px 4px red, 
+    -4px -4px rgb(125, 45, 253);
+    font-size: 14px;
+    transition-duration: 0.2s;
+    color: rgb(5, 1, 250);
+    border-radius: 100%;
+    background-color: rgb(255, 230, 0);
+    
+}
+
+.buttons:hover {
+    width: 140px;
+    font-size: 16px;
+}
+
+
+:focus {
+    outline: 0
+}
+
+.scoreDisplay {
+    display: flex;
+    font-size: 20px;
+}

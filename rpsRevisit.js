@@ -1,4 +1,58 @@
-/* Generate random integer for use within the computerPlay function */
+/* Declaring Constants */
+const randSelect = 3;
+let playerSelection = "unchosen";
+let computerSelection = null;
+let playerWins = 0;
+let computerWins = 0;
+let roundNumber = 1;
+
+/* HTML elements for score display */
+const scoreElements = document.getElementById('scoreElements');
+let playerScoreDisplay = document.createElement('p');
+playerScoreDisplay.classList.add('scoreDisplay');
+let computerScoreDisplay =  document.createElement('p');
+computerScoreDisplay.classList.add('scoreDisplay');
+let roundNumberDisplay = document.createElement('p');
+roundNumberDisplay.classList.add('scoreDisplay');
+
+/* Detecting "Play Game" button-press */
+document.getElementById("play-game").addEventListener('click', function() {
+    playButtonPressed();
+    createInfoPanel();
+});
+
+/* When play button is pressed, we will hide the play button and show the game button container */
+function playButtonPressed() {
+    document.getElementById("play-game").style.display = "none";
+    document.getElementById("buttonsContainer").style.display = "flex";
+}
+/* Creates info panel. This should be triggered when play button is pressed. */
+function createInfoPanel() {
+    scoreElements.appendChild(playerScoreDisplay);
+    scoreElements.appendChild(computerScoreDisplay);
+    scoreElements.appendChild(roundNumberDisplay);
+    playerScoreDisplay.textContent = 'Player Wins: ' + playerWins;
+    computerScoreDisplay.textContent = 'Computer Wins ' + computerWins;
+}
+
+/* Listening for player to click button */
+document.getElementById("rock").addEventListener('click', function() {
+    playerSelection = choose(rock);
+    computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+});
+document.getElementById("paper").onclick = choose("paper");
+document.getElementById("scissors").onclick = choose("scissors");
+
+/* Function to assign the player choice according to which button is pressed. */
+function choose(choice) {
+    playerSelection = choice;
+}
+
+function roundPlay(playerSelection, computerSelection) {
+
+}
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -9,10 +63,6 @@ function computerPlay() {
     /* choiceInt will equal either 0, 1, or 2 */
     let choiceInt = getRandomInt(randSelect);
     let choiceStr = " ";
-
-    /* Debug Command */
-    /* console.log("choiceInt = " + choiceInt); */
-    /* End Debug Command */
 
     /* List of switch cases to convert 0, 1, or 2, to "Rock", "Paper", or "Scissors" */
     switch (choiceInt) {
@@ -28,80 +78,46 @@ function computerPlay() {
         default:
             choiceStr = "poop";
             return choiceStr;
-
-    /* Debug Command */
-    /* End Debug Command */
     }      
 }
 /* This function plays the round */
-function playRound(playerSelection, computerSelection) {
-
-/* Debug Command */
-/* console.log("Player Choice: " + playerSelection.toLowerCase());
-console.log("Computer Choice: " + computerSelection); */
-/* End Debug Command */
-
+function playRound(playerSelection) {
+    
     /* Draw Condition */
     if (playerSelection.toLowerCase() === computerSelection) {
         console.log("Draw.");
+
     /* Rock conditions for player (W/L) */
     } else if (playerSelection.toLowerCase() === "rock") {
         if (computerSelection === "paper") {
             console.log("Computer wins.");
             computerWins++;
+            roundNumber++;
         } else if (computerSelection === "scissors") {
             console.log("You won the round.");
             playerWins++;
+            roundNumber++;
         } 
     /* Paper conditions for player (W/L) */          
     } else if (playerSelection.toLowerCase() === "paper") {
         } else if (computerSelection === "rock") {
             console.log("You won the round.");
             playerWins++;
+            roundNumber++;
         } else if (computerSelection === "scissors") {
             console.log("Computer wins.");
             computerWins++;
+            roundNumber++;
     /* Scissors conditions for player (W/L) */
     } else if (playerSelection.toLowerCase() === "scissors") {
         if (computerSelection === "paper") {
             console.log("You won the round.");
             playerWins++;
+            roundNumber++;
         } else if (computerSelection === "rock") {
             console.log("Computer wins.");
             computerWins++;
+            roundNumber++;
         }
     }
 }
-/* Plays a five round game of rock, paper, scissors. */
-function game() {
-    playerWins = 0;
-    computerWins = 0;
-    for (let i = 0; i <= 5; i++) {
-        playerSelection = prompt("Rock, Paper, or Scissors?");
-        computerSelection = computerPlay();
-        playRound(playerSelection, computerSelection);
-        console.log("Current Score");
-        console.log("You: " + playerWins);
-        console.log("Computer: " + computerWins);
-    }
-
-    /* "Game Over" conditions. Only triggers after 5 rounds have been played. */
-    console.log("Game Over.");
-    if (playerWins > computerWins) {
-        console.log("You win! Score: " + playerWins + " to " + computerWins)
-    }
-    else if (playerWins === computerWins) {
-        console.log("Tie Game. Score: " + playerWins + " to " + computerWins)
-    }
-    else if (playerWins < computerWins) {
-        console.log("The computer beat you. Score: " + playerWins + " to " + computerWins)
-    }
-
-}
-
-/* Declaring Constants */
-const randSelect = 3;
-let playerSelection = "unchosen";
-let computerSelection = null;
-let playerWins = 0;
-let computerWins = 0;

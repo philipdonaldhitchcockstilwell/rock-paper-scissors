@@ -6,52 +6,22 @@
         <title>Rock Paper Scissors</title> 
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Texturina:wght@600&display=swap" rel="stylesheet">
-        <style>
-            .title {
-                display: flex;
-                justify-content: center;
-                font-size: 40px;
-            }
+        <link rel="stylesheet" href="styles/style.css">
 
-            #body {
-                font-family: 'Texturina', serif;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 50vw;
-            }
-
-            .buttons {
-                width: 100px;
-                padding: 10px;
-                margin: 10px;
-                box-shadow: 4px 4px red, 
-                -4px -4px rgb(125, 45, 253);
-                font-size: 14px;
-                transition-duration: 0.2s;
-                color: rgb(38, 0, 255);
-                border-radius: 100%;
-                background-color: rgb(255, 208, 0);
-                
-            }
-
-            .buttons:hover {
-                width: 140px;
-                font-size: 16px;
-            }
-        </style>
     </head>
     <body id='body' class='container'>
         <h1 id='title' class="title">ROCK PAPER SCISSORS</h1>
-        <div id='buttonsContainer' class='container'>
-            <button id='rock' class="buttons">ROCK</button>
-            <button id='paper' class="buttons">PAPER</button>
-            <button id='scissors' class="buttons">SCISSORS</button>
+        <div id='gameElements'>
+            <div id='buttonsContainer' class='container'>
+                <button id='rock' class="buttons">ROCK</button>
+                <button id='paper' class="buttons">PAPER</button>
+                <button id='scissors' class="buttons">SCISSORS</button>
+            </div>
+        </div>    
+        <button id="play-game">PLAY GAME</button>
+        <div id='scoreElements'>
         </div>
-
-        <script src="rps.js">
-
-        </script>
+        
+        <script src="rpsRevisit.js"></script>
     </body>
 </html>
